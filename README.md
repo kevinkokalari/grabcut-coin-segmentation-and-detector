@@ -228,4 +228,4 @@ python3 detector.py
 
 ## Performance
 
-Tested on a MacBook Air with an Apple M4 (10-core CPU, 8-core GPU) and 16 GB unified memory without issues. Inference on single images effectively runs in real time.
+Tested on a MacBook Air with an Apple M3 (8-core CPU, 10-core GPU) and 16 GB unified memory without issues. Inference on single images effectively runs in real time.
