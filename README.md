@@ -4,6 +4,11 @@ GrabCut-based pipeline for segmentation and detection of Japanese yen coins, com
 
 This project was developed as a proof-of-concept addressing the everyday problem of quickly counting mixed Japanese coins placed on a surface.
 
+
+<p align="center">
+  <img src="assets/example3.png" alt="Detected coins on hand" width="400">
+</p>
+
 ---
 
 ## Overview
@@ -53,6 +58,10 @@ Steps:
 4. For each candidate, build a GrabCut seed mask:
    - Inner disc (radius *r*): foreground  
    - Outer disc (radius *1.3r*): probable foreground
+<p align="center">
+  <img src="assets/double_grab.png" alt="Detected coins on hand" width="400">
+</p>
+
 5. Run **GrabCut twice**:
    - First to refine coin regions around candidate circles
    - Second to refine the overall segmentation
@@ -87,23 +96,85 @@ The model was evaluated on **63 unseen test images** with a balanced distributio
 - **Average Recall per Denomination:** 82.95%  
 - **Multi-Class Accuracy:** 82.16%
 
+
+**Confusion matrix:**
+
+<p align="center">
+  <img src="assets/cm.png" alt="Confusion Matrix for the detector and classifier" width="400">
+</p>
+
+
 **Per-denomination (Recall / Precision):**
 
-| Denomination (¥) | Recall (%) | Precision (%) |
-|------------------|-----------:|--------------:|
-| 1                | 100.00     | 89.74         |
-| 5                | 80.56      | 93.55         |
-| 10               | 85.71      | 90.91         |
-| 50               | 80.00      | 80.00         |
-| 100              | 68.57      | 92.31         |
-| 500              | 82.86      | 78.38         |
+<div align="center">
+
+  <table>
+    <thead>
+      <tr>
+        <th>Denomination (¥)</th>
+        <th>Recall (%)</th>
+        <th>Precision (%)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td align="center">1</td>
+        <td align="center">100.00</td>
+        <td align="center">89.74</td>
+      </tr>
+      <tr>
+        <td align="center">5</td>
+        <td align="center">80.56</td>
+        <td align="center">93.55</td>
+      </tr>
+      <tr>
+        <td align="center">10</td>
+        <td align="center">85.71</td>
+        <td align="center">90.91</td>
+      </tr>
+      <tr>
+        <td align="center">50</td>
+        <td align="center">80.00</td>
+        <td align="center">80.00</td>
+      </tr>
+      <tr>
+        <td align="center">100</td>
+        <td align="center">68.57</td>
+        <td align="center">92.31</td>
+      </tr>
+      <tr>
+        <td align="center">500</td>
+        <td align="center">82.86</td>
+        <td align="center">78.38</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
 
 In general, the system:
 
 - Rarely **hallucinates** non-existent coins (high precision)
 - More often **misses** difficult coins (lower recall), especially 100-yen coins due to visual similarity with 50-yen and 500-yen coins and weaker surface features.
 
+
+## Report
+
+For full details, see the project report:
+
+[***What's in my pocket?*** - *A Graph-cutting & Neural Network-based Coin Detector*](report/grabcut_coin_report.pdf)
+
 ---
+
+## Examples
+
+<p align="center">
+  <img src="assets/example1.png" alt="Example Result 1" width="700">
+</p>
+
+<p align="center">
+  <img src="assets/example2.png" alt="Example Result 2r" width="700">
+</p>
 
 ## Installation
 
