@@ -91,10 +91,36 @@ The model was evaluated on **63 unseen test images** with a balanced distributio
 
 **Global metrics:**
 
-- **Average Detection Rate per Image:** 84.46%  
-- **Average Precision per Denomination:** 87.48%  
-- **Average Recall per Denomination:** 82.95%  
-- **Multi-Class Accuracy:** 82.16%
+<div align="center">
+
+  <table>
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>Value (%)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Average Detection Rate per Image</td>
+        <td align="right">84.46</td>
+      </tr>
+      <tr>
+        <td>Average Precision per Denomination</td>
+        <td align="right">87.48</td>
+      </tr>
+      <tr>
+        <td>Average Recall per Denomination</td>
+        <td align="right">82.95</td>
+      </tr>
+      <tr>
+        <td>Multi-Class Accuracy</td>
+        <td align="right">82.16</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
 
 
 **Confusion matrix:**
