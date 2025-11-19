@@ -4,6 +4,11 @@ GrabCut-based pipeline for segmentation and detection of Japanese yen coins, com
 
 This project was developed as a proof-of-concept addressing the everyday problem of quickly counting mixed Japanese coins placed on a surface.
 
+
+<p align="center">
+  <img src="assets/example3.png" alt="Detected coins on hand" width="400">
+</p>
+
 ---
 
 ## Overview
@@ -53,6 +58,10 @@ Steps:
 4. For each candidate, build a GrabCut seed mask:
    - Inner disc (radius *r*): foreground  
    - Outer disc (radius *1.3r*): probable foreground
+<p align="center">
+  <img src="assets/double_grab.png" alt="Detected coins on hand" width="400">
+</p>
+
 5. Run **GrabCut twice**:
    - First to refine coin regions around candidate circles
    - Second to refine the overall segmentation
@@ -87,6 +96,12 @@ The model was evaluated on **63 unseen test images** with a balanced distributio
 - **Average Recall per Denomination:** 82.95%  
 - **Multi-Class Accuracy:** 82.16%
 
+**Confusion matrix:**
+<p align="left">
+  <img src="assets/cm.png" alt="Confusion Matrix for the detector and classifier" width="400">
+</p>
+
+
 **Per-denomination (Recall / Precision):**
 
 | Denomination (¥) | Recall (%) | Precision (%) |
@@ -103,7 +118,24 @@ In general, the system:
 - Rarely **hallucinates** non-existent coins (high precision)
 - More often **misses** difficult coins (lower recall), especially 100-yen coins due to visual similarity with 50-yen and 500-yen coins and weaker surface features.
 
+
+## Report
+
+For full details, see the project report:
+
+[***What's in my pocket?*** - *A Graph-cutting & Neural Network-based Coin Detector*](report/grabcut_coin_report.pdf)
+
 ---
+
+## Examples
+
+<p align="center">
+  <img src="assets/example1.png" alt="Example Result 1" width="700">
+</p>
+
+<p align="center">
+  <img src="assets/example2.png" alt="Example Result 2r" width="700">
+</p>
 
 ## Installation
 
