@@ -119,12 +119,12 @@ pip install -r requirements.txt
 
 ## Usage
 
-To train the CNN, run:
+To train the CNN, replace the example images and denomination folders with your own data, then run:
 ```bash
 python3 CNN.py
 ```
 
-To run the detector:
+To run the detector, add your own test images in the test folder as well as the JSONL file 'labels.jsonl' with the true labels, then run:
 ```bash
 python3 detector.py
 ```
