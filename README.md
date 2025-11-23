@@ -15,14 +15,14 @@ This project was developed as a proof-of-concept addressing the everyday problem
 
 Given a photo of coins lying on a surface, the system:
 
-1. **Segments** individual coins using:
+1. **Segments individual coins using**:
    - Channel selection + CLAHE (contrast-limited adaptive histogram equalization)
    - Gaussian blurring
    - Hough Circle Transform (for coarse coin candidates)
-   - A two-stage **GrabCut** graph-cut refinement
+   - A two-stage GrabCut graph-cut refinement
    - Area-based noise filtering and bounding-box extraction
 
-2. **Classifies** each segmented coin using a **MobileNetV2** CNN, fine-tuned on Japanese yen coins (1, 5, 10, 50, 100, 500 yen).
+2. **Classifies each segmented coin using a *MobileNetV2* CNN, fine-tuned on Japanese yen coins (1, 5, 10, 50, 100, 500 yen)**.
 
 3. **Outputs**:
    - A visualization of detected coins with bounding boxes and predicted denominations
@@ -47,22 +47,22 @@ Given a photo of coins lying on a surface, the system:
 
 The segmentation pipeline assumes:
 
-- Coins **do not overlap**
-- Coins **do not touch each other**
+- Coins *do not overlap*
+- Coins *do not touch each other*
 
 Steps:
 
-1. Extract the **green channel** from the RGB image and apply **CLAHE** to normalize local contrast, as that resulted in the best performance.
-2. Apply **Gaussian blur** to reduce noise and unnecessarily small details.
-3. Run **Hough Circle Transform** to find rough candidate circular regions.
+1. Extract the *green channel* from the RGB image and apply **CLAHE** to normalize local contrast, as that resulted in the best performance.
+2. Apply *Gaussian blur* to reduce noise and unnecessarily small details.
+3. Run *Hough Circle Transform* to find rough candidate circular regions.
 4. For each candidate, build a GrabCut seed mask:
    - Inner disc (radius *r*): foreground  
    - Outer disc (radius *1.3r*): probable foreground
-<p align="center">
+<p align="left">
   <img src="assets/double_grab.png" alt="Detected coins on hand" width="400">
 </p>
 
-5. Run **GrabCut twice**:
+5. Run *GrabCut twice*:
    - First to refine coin regions around candidate circles
    - Second to refine the overall segmentation
 6. Remove segments that are unrealistically small or large relative to image area.
@@ -74,14 +74,14 @@ For each segmented coin:
 
 1. Add a small safety padding around the coin within image bounds.
 2. Convert the coin crop to **YUV** and apply CLAHE on the Y-channel to enhance contrast without distorting color.
-3. Resize to **224×224** (MobileNetV2 input size).
-4. Feed into a **MobileNetV2** model:
+3. Resize to *224×224* (MobileNetV2 input size).
+4. Feed into a *MobileNetV2* model:
    - Pretrained on ImageNet
    - Fine-tuned on a dataset of Japanese yen coins:
      - ~45 training images per denomination
      - ~5 validation images per denomination
 5. Use a softmax output with 6 classes (1, 5, 10, 50, 100, 500 yen).
-6. Accept a prediction only if the model confidence is **≥ 40%**, otherwise treat it as “None”.
+6. Accept a prediction only if the model confidence is *≥ 40%*, otherwise treat it as “None”.
 
 ---
 
@@ -91,7 +91,7 @@ The model was evaluated on **63 unseen test images** with a balanced distributio
 
 **Global metrics:**
 
-<div align="center">
+<div align="left">
 
   <table>
     <thead>
@@ -125,14 +125,14 @@ The model was evaluated on **63 unseen test images** with a balanced distributio
 
 **Confusion matrix:**
 
-<p align="center">
+<p align="left">
   <img src="assets/cm.png" alt="Confusion Matrix for the detector and classifier" width="400">
 </p>
 
 
 **Per-denomination (Recall / Precision):**
 
-<div align="center">
+<div align="left">
 
   <table>
     <thead>
@@ -180,8 +180,8 @@ The model was evaluated on **63 unseen test images** with a balanced distributio
 
 In general, the system:
 
-- Rarely **hallucinates** non-existent coins (high precision)
-- More often **misses** difficult coins (lower recall), especially 100-yen coins due to visual similarity with 50-yen and 500-yen coins and weaker surface features.
+- Rarely hallucinates non-existent coins (high precision)
+- More often misses difficult coins (lower recall), especially 100-yen coins due to visual similarity with 50-yen and 500-yen coins and weaker surface features.
 
 
 ## Report
